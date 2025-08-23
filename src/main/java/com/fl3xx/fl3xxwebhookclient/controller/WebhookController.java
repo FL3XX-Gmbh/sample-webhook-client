@@ -38,15 +38,15 @@ public class WebhookController {
                                              @RequestBody String payload) {
         try {
             // Verify the webhook signature
-//            if (signature == null || signature.isEmpty()) {
-//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//                    .body("Missing webhook signature");
-//            }
-//
-//            if (!hashVerificationService.verifySignature(signature, payload)) {
-//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//                    .body("Invalid webhook signature");
-//            }
+            if (signature == null || signature.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Missing webhook signature");
+            }
+
+            if (!hashVerificationService.verifySignature(signature, payload)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("Invalid webhook signature");
+            }
 
             // Parse the payload to Map for processing
             Map<String, Object> eventPayload = objectMapper.readValue(payload, Map.class);
